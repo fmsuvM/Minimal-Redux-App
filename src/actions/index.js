@@ -7,6 +7,14 @@ export const REQUEST_DATA = 'REQUEST_DATA';
 export const FETCHING_PROJECTS = 'FETCHING_PROJECTS';
 export const RECEIVE_DATA = 'RECEIVE_DATA';
 
-export const requestData = createAction(REQUEST_DATA);
+export const requestData = createAction(REQUEST_DATA, (id) => {
+    return {
+        id
+    }
+});
 export const fetchingProjects = createAction(FETCHING_PROJECTS);
-export const receiveData = createAction(RECEIVE_DATA);
+export const receiveData = createAction(RECEIVE_DATA, (data) => {
+    return {
+        data
+    }
+});
