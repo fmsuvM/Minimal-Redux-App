@@ -9,6 +9,7 @@ import Debug from 'debug';
 import RequestButton from './RequestButton';
 import Explanation from './Explanation';
 import Result from './Result';
+import ConvertButton from './ConvertButton';
 
 import reducers from '../reducers/index';
 import epicsMiddleware from '../middleware/index';
@@ -31,6 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 <Explanation />
                 <RequestButton />
                 <Result />
+                <ConvertButton />
             </div>
         </Provider>,
         document.getElementById('app')

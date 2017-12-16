@@ -30,6 +30,20 @@ class Utils {
             debug('error is occuered');
         })
     }
+
+    async convertPokemonNameFromId(id) {
+        debug('convert pokemon name from id', id);
+        const url = `${host}/pokemon-species/${id}`;
+
+        return axios({
+            responseType: 'json',
+            method: 'GET',
+            url: url
+        })
+        .catch((err) => {
+            debug('error is occuered')
+        })
+    }
 }
 
 const api = new Utils();
