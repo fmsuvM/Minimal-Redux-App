@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Debug from 'debug';
 
 const debug = Debug('ocreilly::components::Result');
 
-export default class Result extends Component {
+class Result extends Component {
     constructor(props) {
         super(props);
     }

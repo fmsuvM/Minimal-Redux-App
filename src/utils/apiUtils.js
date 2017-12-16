@@ -4,9 +4,19 @@ import qs from 'qs';
 import 'babel-polyfill';
 
 const debug = Debug('ocreilly::apiUtil');
-const host = 'http://pokeapi.co/api/v2/';
+const host = 'http://pokeapi.co/api/v2';
 
 class Utils {
+    constructor() {
+        this.dispatch = null;
+        this.store = null;
+    }
+
+    init(store) {
+        this.dispatch = store.dispatch;
+        this.store = store;
+    }
+
     async getPokemonNameFromId(id) {
         debug('get pokemon name from id', id);
         const url = `${host}/pokemon/${id}`;

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { handleActions } from 'redux-actions';
+import { handleActions, handleAction } from 'redux-actions';
 import Debug from 'debug';
 
 import {
@@ -12,24 +12,51 @@ const debug = Debug('ocreilly::reducers::index');
 
 const initialState = {
     isFetching: false,
-    data: null,
-    name: null
+    data: {
+        name: '???',
+        image: 'https://i.gyazo.com/179f7bd68a97a3911c4acba2eb4161b1.png',
+        types: [
+            '???'
+        ],
+        weight: '???'
+    },
+    showButton: false
 };
 
+const countTypes = (data) => {
+    const typesNum = data.length;// 配列の長さ取得
+    const haveTypes = {
+        ...data.reduce((prev, types, index) => {
+            prev[index] = types.type.name;
+            return prev
+        }, {})
+    };
+    const typeArray = [];
+    Object.keys(haveTypes).forEach((key) => {
+        typeArray.push(haveTypes[key])
+    });
+    debug('types',typeArray);
+    return typeArray;
+} 
+
 export default handleActions({
-    [REQUEST_DATA]: (state, action) => {
-        return {
-            ...state
-        }
-    },
     [FETCHING_PROJECTS]: (state, action) => {
         return {
-            ...state
+            ...state,
+            isFetching: true
         }
     },
     [RECEIVE_DATA]: (state, action) => {
-        return {
-            ...state
-        }
+        debug('receive data', action)
+        const{ data } = action.payload;
+        return Object.assign({}, state, {
+            data: {
+                name: data.name,
+                image: data.sprites.front_default,
+                types: countTypes(data.types),
+                weight: data.weight
+            },
+            isFetching: false
+        })
     }    
 }, initialState);
