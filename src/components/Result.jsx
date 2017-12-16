@@ -21,25 +21,46 @@ class Result extends Component {
                         justify-content: center;
                         align-items: center; 
                     }
+                    .results ul {
+                        list-style: none;
+                    }
+                    .result-item {
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                    }
+                    .result-item img{
+                        max-width: 600px;
+                        height: auto;
+                    }
                 `}</style>
-                <div className="results">
-                    <h2>Results !</h2>
-                    <ul className="results-list">
-                        <li className="result-item">{this.props.name}</li>
-                        <li className="result-item">{this.props.types}</li>
-                        <li className="result-item">
-                            <img src={this.props.image} />
-                        </li>
-                        <li className="result-item">{this.props.weight}</li>
-                    </ul>
-                </div>
+                {this.props.isFetching ? (
+                    <div className="results">
+                        <h2> Now Loading... </h2>
+                    </div>
+                ) : (
+                    <div className="results">
+                        <h2>Results !</h2>
+                        <ul className="results-list">
+                            <li className="result-item"><h3>Name: {this.props.name}</h3></li>
+                            <li className="result-item"><h3>Types: {this.props.types}</h3></li>
+                            <li className="result-item" id="result-image">
+                                <img src={this.props.image} />
+                            </li>
+                            <li className="result-item"><h3>Weight: {this.props.weight}</h3></li>
+                        </ul>
+                    </div>
+                )}
             </div>
         )
     }
 }
 
 Result.propTypes = {
-
+    name: PropTypes.string,
+    image: PropTypes.string,
+    types: PropTypes.array,
+    showButton: PropTypes.bool,
+    isFetching: PropTypes.bool
 }
 
 const mapStateToProps = (state) => (
@@ -48,16 +69,9 @@ const mapStateToProps = (state) => (
         image: state.data.image,
         types: state.data.types,
         weight: state.data.weight,
-        showButton: state.showButton
+        showButton: state.showButton,
+        isFetching: state.isFetching
     }
 );
 
-const mapDispatchToProps = (dispatch) => (
-    {
-        getPokemonFromId: (id) => {
-            dispatch(requestData(id));
-        }
-    }
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Result);
+export default connect(mapStateToProps, null)(Result);

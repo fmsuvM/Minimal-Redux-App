@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
+import { Button } from 'react-bootstrap';
 
 import { requestData } from '../actions/index';
 
@@ -38,9 +39,9 @@ class RequestButton extends Component {
                         value={this.state.searchId}
                         onChange={this.handleIdChange}
                     />
-                    <a className="action-button" onClick={this.onClick}>
-                        <h3>Request Button 2017</h3>
-                    </a>
+                    <Button bsStyle="primary" onClick={this.onClick}>
+                        Search
+                    </Button>
                 </div>
             </div>
         )
